@@ -1,0 +1,77 @@
+/* GENERAL ======================================== */
+
+body
+{
+	font-family : sans-serif;
+}
+
+
+/* AFFICHAGE TENSEURS ===========================  */
+
+.tenseur
+{
+	display:inline-block;
+	vertical-align:middle;
+	border-left:solid;
+	border-right:solid;
+}
+	
+.tenseur table
+{
+	border-collapse: collapse;
+}
+
+.tenseur td
+{
+	width:10px;
+	height:40px;
+	margin:20px;
+}
+
+.tenseur input
+{
+	width: 80px;
+}
+        
+        
+
+/* FENETRE 3D  ===================================   */	
+#visu
+{
+	float:left;
+	border:solid 1px;
+	width:800px;
+	height:600px;
+	padding:none;
+	margin:10px;
+}
+
+
+/* FENETRES DEROULANTES ============================= */
+
+.boite_deroulante
+{
+	width:600px;
+	background-color : #DDFFEE;
+	box-shadow: 2px 2px 8px #555;
+	border-radius : 10px;
+	padding:0px;
+	margin:10px;
+}
+
+.titre_div_deroulant
+{
+	background-color : #00AAAA;
+	color:white;
+	font-weight:bold;
+	padding:10px;
+	border-radius : 10px;
+	cursor:pointer;
+}
+
+.contenu_div_deroulant
+{
+	display : none;
+	padding:10px;
+	text-align:center;
+}
