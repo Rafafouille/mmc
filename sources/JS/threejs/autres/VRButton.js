@@ -15,6 +15,8 @@ class VRButton {
 			let currentSession = null;
 
 			function onSessionStarted( session ) {
+			
+				SESSION_XR = session;
 
 				session.addEventListener( 'end', onSessionEnded );
 
@@ -22,6 +24,16 @@ class VRButton {
 				button.textContent = 'EXIT VR';
 
 				currentSession = session;
+				
+				
+				// AJOUTE PAR RAF
+				
+				/*function onSelectStart(event)
+				{
+					console.log(event);
+				}
+				
+				session.addEventListener("selectstart", onSelectStart);*/
 
 			}
 

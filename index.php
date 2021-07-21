@@ -46,6 +46,7 @@ var mesh_masque;
 var groupeNormale3D;
 var vecteurContrainte3D;
 var manette1, manette1bis;
+var SESSION_XR=null;
 
 var MIN = -2;
 var MAX = 2;
