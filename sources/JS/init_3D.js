@@ -231,7 +231,7 @@ function animate(){
 		compteur_UPDATE_NORMALE_FROM_MANETTE+=1;
 	
 	
-	if(UPDATE_NORMALE_FROM_MANETTE && compteur_UPDATE_NORMALE_FROM_MANETTE%100==0)
+	if(UPDATE_NORMALE_FROM_MANETTE && compteur_UPDATE_NORMALE_FROM_MANETTE%20==0)
 	{
 		udpateNormaleVecteurFromControlleurVR();
 	}

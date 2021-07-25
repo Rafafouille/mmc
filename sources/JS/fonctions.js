@@ -252,19 +252,28 @@ function updateNormaleVecteurFromNormaleHTML()
 	
 	//Update des graphismes
 	updateNormaleGraphiqueFromVecteurNormale();
+	//Update Cercle de Mohr
+	dessineActuelPointCercleDeMohr()
 }
 
 // Met à jour la normale à partir du vecteur HTML (et met à jour les graphisme)
 function udpateNormaleVecteurFromControlleurVR()
 {
-	var n = manette1.localToWorld(new THREE_.Vector3(0.,0.,1.));
-	normale.set([0,0],n.x)
-	normale.set([1,0],n.y)
-	normale.set([2,0],n.z)
+	var n1 = manette1.localToWorld(new THREE_.Vector3(0.,0.,1.));
+	var n0 = manette1.localToWorld(new THREE_.Vector3(0.,0.,0.));
+	var n = n1.sub(n0);
+	
+	
+	
+	normale.set([0,0],-n.x)
+	normale.set([1,0],-n.y)
+	normale.set([2,0],-n.z)
 	// Update l'affichage HTML
 	updateNormaleHTMLFromNormaleVecteur();
 	//Update des graphismes
 	updateNormaleGraphiqueFromVecteurNormale();
+	//Update Cercle de Mohr
+	dessineActuelPointCercleDeMohr()
 }
 
 function update_bouton_normale_from_manette()
@@ -302,6 +311,7 @@ function faitTournerN(matRot)
 	normale = math.multiply(matRot,normale);
 	updateNormaleHTMLFromNormaleVecteur();
 	updateNormaleGraphiqueFromVecteurNormale();
+	dessineActuelPointCercleDeMohr();
 }
 
 function nRotationX(theta)
@@ -473,3 +483,48 @@ function updateFacteurContrainte()
 	$("#indication_exageration_contrainte").text(coeffAffichageContrainte());
 	calculeVecteurContrainte();
 }
+
+
+
+
+// CERCLES DE MOHR ========================================================
+
+function getContrainteNormale()
+{
+	return math.dot(vecteurContrainte,normale)
+}
+
+function getContrainteTangeantielle()
+{
+	var tau = math.subtract(vecteurContrainte, math.multiply(getContrainteNormale(),normale))
+	return math.norm(math.transpose(tau)._data[0])
+}
+
+
+// Dessine un point sur la graphique du cercle de mohr.
+// x et y en MPa
+function ajoutePointCercleDeMohr(x,y)
+{
+	var circle = new createjs.Shape();
+	
+	cursorCercleDeMohr.x = x ;
+	cursorCercleDeMohr.y = -y ;
+	
+	circle.graphics.beginFill("red").drawCircle(x, -y, 3/scene_Mohr.scaleX);
+	dessin_mohr.addChild(circle);
+	stage_Mohr.update();
+	lastPointMohr.x=x; //Sauvegarde les dernières coordonnées.
+	lastPointMohr.y=y;
+}
+
+// Dessine LE point actuel (à partir de sigma et de n) sur le cercle de mohr
+// DistMin empeche de dessiner si le point est proche (au sens de distMin) du précédent.
+// Les coordonnées du nouveau point sont mis à jour dans 
+function dessineActuelPointCercleDeMohr(distMin=1)
+{
+	var x=getContrainteNormale()/1000000;
+	var y=getContrainteTangeantielle()/1000000;
+	if( (x-lastPointMohr.x)*(x-lastPointMohr.x)+(y-lastPointMohr.y)*(y-lastPointMohr.y) >= distMin*distMin/scene_Mohr.scaleX/scene_Mohr.scaleX )
+		ajoutePointCercleDeMohr(x,y);
+}
+

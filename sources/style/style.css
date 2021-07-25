@@ -75,3 +75,13 @@ body
 	padding:10px;
 	text-align:center;
 }
+
+
+
+/* CERCLE DE MOHR ========================================= */
+
+#canvas_cercle_mohr
+{
+	border : solid;
+	margin-top:10px;
+}

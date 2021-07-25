@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <!-- En-tête de la page -->
         <meta charset="utf-8" />
         <title>MMC</title>
-        
+        <meta name="description" content="Illustration en 3D des calculs en mécanique des milieux continus."/>
         
 	<link rel="stylesheet" type="text/css" href="sources/style/style.css" />
 	
@@ -19,6 +19,10 @@
 	<script type="text/javascript" src="sources/JS/fonctions.js" ></script>
 	<script type="text/javascript" src="sources/JS/init_math.js" ></script>
 	
+	<script type="text/javascript" src="sources/JS/easeljs/createjs.min.js"></script>
+
+	<script type="text/javascript" src="sources/JS/easeljs/CLASS-Bipoint.js"></script>
+	<script type="text/javascript" src="sources/JS/CLASS-Vecteur.js"></script>
 
 
 	<script>
@@ -47,6 +51,10 @@ var groupeNormale3D;
 var vecteurContrainte3D;
 var manette1, manette1bis;
 var SESSION_XR=null;
+// Cercles de mohr
+var stage_Mohr, scene_Mohr, dessin_mohr, cursorCercleDeMohr;
+var lastPointMohr = {x:10000000000,y:100000000};
+
 
 var MIN = -2;
 var MAX = 2;
@@ -60,6 +68,12 @@ var MAX_Z=2;
 	</script>
 	<script type="module" type="text/javascript" src="sources/JS/init_3D.js" ></script>
     </head>
+
+
+
+
+
+
 
     <body>
         <!-- Corps de la page -->
@@ -255,7 +269,7 @@ var MAX_Z=2;
 			    <!-- NORMALE ==================== -->
 			       <div class="boite_deroulante" id="vecteur_normal">
 			       	<div class="titre_div_deroulant" onclick="$(this).parent().find('.contenu_div_deroulant').slideToggle()">
-			       		Normale / Vecteur contrainte
+			       		Normale / Vecteur contrainte / Cercle de Mohr
 			       	</div>
 			       	<div class="contenu_div_deroulant">
 				       	<div style="display:inline-block;">
@@ -289,6 +303,11 @@ var MAX_Z=2;
 				       		<br/>
 				       		<button onclick="nRotationZ(-math.pi/12)">-Rz</button><button onclick="nRotationZ(math.pi/12)">+Rz</button>
 				       	</div>
+				       	
+						<div id="cercle_mohr">
+							<canvas id="canvas_cercle_mohr" width="500" height="300"></canvas>
+							<script type="text/javascript" src="sources/JS/init_cercle_mohr.js" ></script>	
+						</div>
 			       	</div>
 				</div>
 				
@@ -314,6 +333,7 @@ var MAX_Z=2;
 			</td>
 		</tr>
 	</table>
+	
         
     </body>
 </html>
