@@ -182,8 +182,6 @@ function init(){
 	
 //	animate();
 	renderer.setAnimationLoop(animate);
-	console.log("test");
-	console.log(renderer.xr.getReferenceSpace());
 }
 
 

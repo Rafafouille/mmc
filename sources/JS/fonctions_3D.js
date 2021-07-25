@@ -219,11 +219,6 @@ export function cree_repere_propre(scene,mat)
 	var V2 = new THREE.Vector3(vecteurs_propres[0][1],vecteurs_propres[1][1],vecteurs_propres[2][1]);
 	var V3 = new THREE.Vector3(vecteurs_propres[0][2],vecteurs_propres[1][2],vecteurs_propres[2][2]);
 	
-	console.log("=====");
-	console.log(mat._data);
-	console.log(V1);
-	console.log(V2);
-	console.log(V3);
 	
 	//X
 	var material = new THREE.LineBasicMaterial( { color: 0x0000ff } );

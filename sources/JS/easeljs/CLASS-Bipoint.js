@@ -182,8 +182,6 @@ var Bipoint = function(__p1__,__p2__)
 				.moveTo(this.x2(),this.y2())
 				.lineTo(this.x2()-this._vecteur.coordUnitaire().dx*this._LONGUEURFleche-this._vecteur.coordNormale().dx*this._LARGEURFleche,	this.y2()-this._vecteur.coordUnitaire().dy*this._LONGUEURFleche-this._vecteur.coordNormale().dy*this._LARGEURFleche)
 				.lineTo(this.x2()-this._vecteur.coordUnitaire().dx*this._LONGUEURFleche+this._vecteur.coordNormale().dx*this._LARGEURFleche,	this.y2()-this._vecteur.coordUnitaire().dy*this._LONGUEURFleche+this._vecteur.coordNormale().dy*this._LARGEURFleche);//Note cela prend l'inversion de l'axe Y
-			console.log("FLECHE")
-			console.log(this._vecteur)
 			this.addChild(this._bout);
 
 
