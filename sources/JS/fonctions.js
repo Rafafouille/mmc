@@ -507,10 +507,12 @@ function ajoutePointCercleDeMohr(x,y)
 {
 	var circle = new createjs.Shape();
 	
-	cursorCercleDeMohr.x = x ;
-	cursorCercleDeMohr.y = -y ;
+	cursorCercleDeMohr.x = x * zoom_Mohr ;
+	cursorCercleDeMohr.y = -y * zoom_Mohr ;
 	
-	circle.graphics.beginFill("red").drawCircle(x, -y, 3/scene_Mohr.scaleX);
+	circle.graphics.beginFill("red").drawCircle(0, 0, 3);
+	circle.x = x * zoom_Mohr ;
+	circle.y = -y * zoom_Mohr ;
 	dessin_mohr.addChild(circle);
 	stage_Mohr.update();
 	lastPointMohr.x=x; //Sauvegarde les dernières coordonnées.

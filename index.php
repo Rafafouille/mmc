@@ -54,6 +54,7 @@ var SESSION_XR=null;
 // Cercles de mohr
 var stage_Mohr, scene_Mohr, dessin_mohr, cursorCercleDeMohr;
 var lastPointMohr = {x:10000000000,y:100000000};
+var zoom_Mohr=1;
 
 
 var MIN = -2;
@@ -85,7 +86,7 @@ var MAX_Z=2;
         
         
         
-        
+        40
     <!-- Options ==================== -->
        <div id="options">
        		<form>
