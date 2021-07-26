@@ -530,3 +530,68 @@ function dessineActuelPointCercleDeMohr(distMin=1)
 		ajoutePointCercleDeMohr(x,y);
 }
 
+function redessineAxesMohr()
+{
+	// On replace les axes dans le cadre de l'image
+	scene_Mohr.axes.axeX.x = -scene_Mohr.x+250//(1-facteur)*(posScene.x-posSouris.x);
+	scene_Mohr.axes.axeY.y = -scene_Mohr.y+150//(1-facteur)*(posScene.y-posSouris.y);
+	
+	
+	scene_Mohr.axes.axeX.grad.removeAllChildren();
+	scene_Mohr.axes.axeY.grad.removeAllChildren();
+	
+
+	
+	// a l'échelle 1 : 1px = 1MPa
+	
+	var niveauZoom = Math.floor(Math.log10(zoom_Mohr));
+	var unite1 = zoom_Mohr/Math.pow(10,niveauZoom-1);
+	var unite2 = zoom_Mohr/Math.pow(10,niveauZoom);
+	
+	//graduactions sur x
+	var gradxMin = Math.floor(-scene_Mohr.x/unite1)*unite1
+	gradxMin -= scene_Mohr.axes.axeX.x // Car c'est dessiné dans le référentiel de l'axe, et non de la scene
+	var gradxMax = Math.floor((500-scene_Mohr.x)/unite1)*unite1+unite1
+	gradxMax -= scene_Mohr.axes.axeX.x // idem
+	
+	for(xx = gradxMin ; xx <= gradxMax ; xx+=unite1)
+	{
+		var ligne = new createjs.Shape();
+		if(  Math.round(((xx+scene_Mohr.axes.axeX.x)/unite1))%10     )//Multiple de 10
+		{
+			var epaisseur = 1;
+			var couleur = "#EEEEEE";
+		}
+		else
+		{
+			var epaisseur = 2;
+			var couleur = "#AAAAAA";
+		}
+		ligne.graphics.setStrokeStyle(epaisseur).beginStroke(couleur).moveTo(xx,-100000).lineTo(xx,100000);
+		scene_Mohr.axes.axeX.grad.addChild(ligne);
+	}
+	
+	//Graduations sur y
+	var gradyMin = Math.floor(-scene_Mohr.y/unite1)*unite1
+	gradyMin -= scene_Mohr.axes.axeY.y // Car c'est dessiné dans le référentiel de l'axe, et non de la scene
+	var gradyMax = Math.floor((300-scene_Mohr.y)/unite1)*unite1+unite1
+	gradyMax -= scene_Mohr.axes.axeY.y // idem
+	
+	for(yy = gradyMin ; yy <= gradyMax ; yy+=unite1)
+	{
+		var ligne = new createjs.Shape();
+		if(  Math.round(((yy+scene_Mohr.axes.axeY.y)/unite1))%10     )//Multiple de 10
+		{
+			var epaisseur = 1;
+			var couleur = "#EEEEEE";
+		}
+		else
+		{
+			var epaisseur = 2;
+			var couleur = "#AAAAAA";
+		}
+		ligne.graphics.setStrokeStyle(epaisseur).beginStroke(couleur).moveTo(-100000,yy).lineTo(100000,yy);
+		scene_Mohr.axes.axeY.grad.addChild(ligne);
+	}
+}
+

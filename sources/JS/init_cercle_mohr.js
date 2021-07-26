@@ -14,28 +14,39 @@ var axes = new createjs.Container();
 scene_Mohr.axes = axes;
 scene_Mohr.addChild(axes)
 
+// Axe X
 var axeX = new Bipoint({x:-250,y:0},{x:250,y:0})
 axes.axeX = axeX;
-axes.addChild(axeX);
 
 var textX = new createjs.Text("σ", "20px Arial", "black");
  textX.x = 230;
  textX.y = -15;
  textX.textBaseline = "alphabetic";
-axes.textX = textX;
-axes.addChild(textX);
+//axes.textX = textX;
 
+var gradX = new createjs.Container();
+axeX.grad = gradX
 
+axeX.addChild(gradX);
+axeX.addChild(textX);
+axes.addChild(axeX);
+
+// Axe Y
 var axeY = new Bipoint({x:0,y:150},{x:0,y:-150})
 axes.axeY = axeY;
-axes.addChild(axeY);
 
 var textY = new createjs.Text("τ", "20px Arial", "black");
  textY.x = 15;
  textY.y = -135;
  textY.textBaseline = "alphabetic";
-axes.textY = textY;
-axes.addChild(textY);
+//axes.textY = textY;
+
+var gradY = new createjs.Container();
+axeY.grad = gradY
+
+axeY.addChild(gradY);
+axeY.addChild(textY);
+axes.addChild(axeY);
 
 // DESSIN =======================
 dessin_mohr = new createjs.Container();
@@ -51,6 +62,9 @@ cursorCercleDeMohr.graphics.moveTo(0,5).lineTo(0,-5) ;
 scene_Mohr.addChild(cursorCercleDeMohr) ;
 cursorCercleDeMohr.x = 100000 ;
 cursorCercleDeMohr.y = 200000 ;
+
+
+redessineAxesMohr();
 
 stage_Mohr.update();
 
@@ -86,10 +100,11 @@ function actionMolette(event)
 	
 	// REDESSINE AXES...
 	// A redessiner completement....
-	scene_Mohr.axes.axeX.x += (1-facteur)*(posScene.x-posSouris.x);
-	scene_Mohr.axes.textX.x += (1-facteur)*(posScene.x-posSouris.x);
-	scene_Mohr.axes.axeY.y += (1-facteur)*(posScene.y-posSouris.y);
-	scene_Mohr.axes.textY.y += (1-facteur)*(posScene.y-posSouris.y);
+	redessineAxesMohr();
+//	scene_Mohr.axes.axeX.x += (1-facteur)*(posScene.x-posSouris.x);
+//	scene_Mohr.axes.textX.x += (1-facteur)*(posScene.x-posSouris.x);
+//	scene_Mohr.axes.axeY.y += (1-facteur)*(posScene.y-posSouris.y);
+//	scene_Mohr.axes.textY.y += (1-facteur)*(posScene.y-posSouris.y);
 	
 	stage_Mohr.update();
 }

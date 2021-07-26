@@ -86,7 +86,6 @@ var MAX_Z=2;
         
         
         
-        40
     <!-- Options ==================== -->
        <div id="options">
        		<form>

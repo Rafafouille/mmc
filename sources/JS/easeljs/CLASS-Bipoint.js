@@ -21,6 +21,7 @@ var Bipoint = function(__p1__,__p2__)
 		
 		this._LONGUEURFleche=10;	//Longueur du bout de la fleche, en pixel
 		this._LARGEURFleche=5;	//Largeur du bout de la fleche, en pixel
+		this._LARGEURTrait=3;
 		this._couleur="black";	//Couleur de la fleche
 
 	//==========================
@@ -173,7 +174,7 @@ var Bipoint = function(__p1__,__p2__)
 	//==========================
 			//Dessin de la tige
 			this._tige= new createjs.Shape();
-			this._tige.graphics.beginStroke(this._couleur).moveTo(this.x1(),this.y1()).lineTo(this.x2(),this.y2());
+			this._tige.graphics.setStrokeStyle(this._LARGEURTrait).beginStroke(this._couleur).moveTo(this.x1(),this.y1()).lineTo(this.x2(),this.y2());
 			this.addChild(this._tige);
 			
 			//Dessin du bout de la fleche
