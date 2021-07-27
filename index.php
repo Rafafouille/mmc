@@ -68,6 +68,9 @@ var MAX_Z=2;
 
 	</script>
 	<script type="module" type="text/javascript" src="sources/JS/init_3D.js" ></script>
+	
+	<script type="module" type="text/javascript" src="sources/JS/statistiques.js" ></script>
+	
     </head>
 
 
