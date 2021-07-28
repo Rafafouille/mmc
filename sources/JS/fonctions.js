@@ -528,6 +528,8 @@ function dessineActuelPointCercleDeMohr(distMin=1)
 	var y=getContrainteTangeantielle()/1000000;
 	if( (x-lastPointMohr.x)*(x-lastPointMohr.x)+(y-lastPointMohr.y)*(y-lastPointMohr.y) >= distMin*distMin/scene_Mohr.scaleX/scene_Mohr.scaleX )
 		ajoutePointCercleDeMohr(x,y);
+	$("#affichage_contrainte_normale").text(afficheContrainteAvecUnite(getContrainteNormale(),1))
+	$("#affichage_contrainte_tangentielle").text(afficheContrainteAvecUnite(getContrainteTangeantielle(),1))
 }
 
 function redessineAxesMohr()

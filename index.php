@@ -312,6 +312,10 @@ var MAX_Z=2;
 						<div id="cercle_mohr">
 							<canvas id="canvas_cercle_mohr" width="500" height="300"></canvas>
 							<script type="text/javascript" src="sources/JS/init_cercle_mohr.js" ></script>	
+							<br/>
+							σ = <span id="affichage_contrainte_normale">0 Pa</span>
+							&nbsp;&nbsp;&nbsp;
+							τ = <span id="affichage_contrainte_tangentielle">0 Pa</span>
 						</div>
 			       	</div>
 				</div>
