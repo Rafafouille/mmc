@@ -211,7 +211,7 @@ var MAX_Z=2;
 						<br/>
 						<form>
 							<label for="facteur_exageration_contrainte">Coef. exagération de σ : </label><input id="facteur_exageration_contrainte" name="facteur_exageration_contrainte" type="range" min="1" max="1000" oninput="updateFacteurContrainte()" value="1000"/>
-							(x<span id="indication_exageration_contrainte">5e-8</span>)
+							<br/>(x<span id="indication_exageration_contrainte">5e-8</span>)
 						</form>
 					</div>
 				</div>
@@ -312,6 +312,10 @@ var MAX_Z=2;
 						<div id="cercle_mohr">
 							<canvas id="canvas_cercle_mohr" width="500" height="300"></canvas>
 							<script type="text/javascript" src="sources/JS/init_cercle_mohr.js" ></script>	
+							<br/>
+							σ = <span id="affichage_contrainte_normale">0 Pa</span>
+							&nbsp;&nbsp;&nbsp;
+							τ = <span id="affichage_contrainte_tangentielle">0 Pa</span>
 						</div>
 			       	</div>
 				</div>

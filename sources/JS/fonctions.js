@@ -528,6 +528,8 @@ function dessineActuelPointCercleDeMohr(distMin=1)
 	var y=getContrainteTangeantielle()/1000000;
 	if( (x-lastPointMohr.x)*(x-lastPointMohr.x)+(y-lastPointMohr.y)*(y-lastPointMohr.y) >= distMin*distMin/scene_Mohr.scaleX/scene_Mohr.scaleX )
 		ajoutePointCercleDeMohr(x,y);
+	$("#affichage_contrainte_normale").text(afficheContrainteAvecUnite(getContrainteNormale(),1))
+	$("#affichage_contrainte_tangentielle").text(afficheContrainteAvecUnite(getContrainteTangeantielle(),1))
 }
 
 function redessineAxesMohr()
@@ -593,5 +595,45 @@ function redessineAxesMohr()
 		ligne.graphics.setStrokeStyle(epaisseur).beginStroke(couleur).moveTo(-100000,yy).lineTo(100000,yy);
 		scene_Mohr.axes.axeY.grad.addChild(ligne);
 	}
+}
+
+
+// Ecrit la valeur d'une perssion sous la forme d'une chaîne de caractère simplifiée (unité adaptées)
+// chiffresSignificatifs indique le nombre de chiffre après la virgule (au vue de l'unité choisie)
+function afficheContrainteAvecUnite(val,chiffresSignificatifs = 0)
+{
+	//chiffresSignificatifs+=1;
+	var nb = Math.floor(Math.log10(val)+1)
+	
+	var unite = "Pa"
+	if(nb > 9)
+	{
+		unite = "GPa"
+		val = Math.floor(val/(Math.pow(10,9-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb > 6)
+	{
+		unite = "MPa"
+		val = Math.floor(val/(Math.pow(10,6-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb >3)
+	{
+		unite = "kPa"
+		val = Math.floor(val/(Math.pow(10,3-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(val==0)
+		return "0 Pa"
+	else if(nb < -1)
+	{
+		unite = "mPa"
+		val = Math.floor(val/(Math.pow(10,-3-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else
+	{
+		unite = "Pa"
+		val = Math.floor(val/(Math.pow(10,0-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+		
+	return String(val)+" "+unite
 }
 
