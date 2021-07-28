@@ -15,8 +15,10 @@ scene_Mohr.axes = axes;
 scene_Mohr.addChild(axes)
 
 // Axe X
-var axeX = new Bipoint({x:-250,y:0},{x:250,y:0})
+var axeX = new createjs.Container();
 axes.axeX = axeX;
+
+var flecheX = new Bipoint({x:-250,y:0},{x:250,y:0})
 
 var textX = new createjs.Text("σ", "20px Arial", "black");
  textX.x = 230;
@@ -28,12 +30,15 @@ var gradX = new createjs.Container();
 axeX.grad = gradX
 
 axeX.addChild(gradX);
+axeX.addChild(flecheX)
 axeX.addChild(textX);
 axes.addChild(axeX);
 
 // Axe Y
-var axeY = new Bipoint({x:0,y:150},{x:0,y:-150})
+var axeY = new createjs.Container();
 axes.axeY = axeY;
+
+var flecheY = new Bipoint({x:0,y:150},{x:0,y:-150})
 
 var textY = new createjs.Text("τ", "20px Arial", "black");
  textY.x = 15;
@@ -45,6 +50,7 @@ var gradY = new createjs.Container();
 axeY.grad = gradY
 
 axeY.addChild(gradY);
+axeY.addChild(flecheY)
 axeY.addChild(textY);
 axes.addChild(axeY);
 

@@ -571,6 +571,7 @@ function redessineAxesMohr()
 		}
 		ligne.graphics.setStrokeStyle(epaisseur).beginStroke(couleur).moveTo(xx,-100000).lineTo(xx,100000);
 		scene_Mohr.axes.axeX.grad.addChild(ligne);
+		
 	}
 	
 	//Graduations sur y
@@ -594,6 +595,28 @@ function redessineAxesMohr()
 		}
 		ligne.graphics.setStrokeStyle(epaisseur).beginStroke(couleur).moveTo(-100000,yy).lineTo(100000,yy);
 		scene_Mohr.axes.axeY.grad.addChild(ligne);
+		
+		// Unité
+		if( Math.round(((yy+scene_Mohr.axes.axeY.y)/unite1)) == -1 )
+		{
+			var textUnite = new createjs.Text(afficheContrainteAvecUnite(Math.pow(10,7-niveauZoom),5), "10px Arial", "black");
+			 textUnite.x = -5;
+			 textUnite.y = yy+4;
+			 textUnite.textBaseline = "alphabetic";
+			 textUnite.textAlign="right";
+			 scene_Mohr.axes.axeY.grad.addChild(textUnite);
+		}
+		if( Math.round(((yy+scene_Mohr.axes.axeY.y)/unite1)) == -10 )
+		{
+			var textUnite = new createjs.Text(afficheContrainteAvecUnite(Math.pow(10,8-niveauZoom),5), "10px Arial", "black");
+			 textUnite.x = -5;
+			 textUnite.y = yy+4;
+			 textUnite.textBaseline = "alphabetic";
+			 textUnite.textAlign="right";
+			 scene_Mohr.axes.axeY.grad.addChild(textUnite);
+		}
+		
+		
 	}
 }
 
@@ -606,7 +629,12 @@ function afficheContrainteAvecUnite(val,chiffresSignificatifs = 0)
 	var nb = Math.floor(Math.log10(val)+1)
 	
 	var unite = "Pa"
-	if(nb > 9)
+	if(nb > 12)
+	{
+		unite = "TPa"
+		val = Math.floor(val/(Math.pow(10,12-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb > 9)
 	{
 		unite = "GPa"
 		val = Math.floor(val/(Math.pow(10,9-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
@@ -623,6 +651,16 @@ function afficheContrainteAvecUnite(val,chiffresSignificatifs = 0)
 	}
 	else if(val==0)
 		return "0 Pa"
+	else if(nb < -7)
+	{
+		unite = "nPa"
+		val = Math.floor(val/(Math.pow(10,-9-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb < -4)
+	{
+		unite = "µPa"
+		val = Math.floor(val/(Math.pow(10,-6-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
 	else if(nb < -1)
 	{
 		unite = "mPa"
