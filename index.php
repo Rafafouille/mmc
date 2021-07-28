@@ -315,6 +315,7 @@ var MAX_Z=2;
 				</div>
 				
 				
+				
 			    <!-- VR ==================== -->
 			       <div class="boite_deroulante" id="VR">
 			       	<div class="titre_div_deroulant" onclick="$(this).parent().find('.contenu_div_deroulant').slideToggle()">
@@ -331,6 +332,22 @@ var MAX_Z=2;
 			       	</div>
 			       </div>
 				
+				
+				
+			    <!-- CREDITS ==================== -->
+			       <div class="boite_deroulante" id="credits">
+			       	<div class="titre_div_deroulant" onclick="$(this).parent().find('.contenu_div_deroulant').slideToggle()">
+			       		À Propos
+			       	</div>
+			       	<div class="contenu_div_deroulant">
+				       	Application web développée par <a href="allais.eu">Raphaël ALLAIS</a>,<br/>
+				       	dans le cadre de vacations à l'<a href="https://www.estp.fr/campus-de-dijon">ESTP Paris, campus de Dijon</a>.<br/>
+				       	&#9993; : allais.raphael<span class="aarroobbaatt">free.fr</span><br/>
+				       	<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+				       		<img alt="Licence Creative Commons" style="border-width:0" src="sources/images/creative_common.png" />
+				       	</a>
+			       	</div>
+				</div>
 				
 	
 			</td>
