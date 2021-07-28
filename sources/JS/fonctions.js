@@ -544,7 +544,7 @@ function redessineAxesMohr()
 	
 	// a l'échelle 1 : 1px = 1MPa
 	
-	var niveauZoom = Math.floor(Math.log10(zoom_Mohr));
+	var niveauZoom = Math.floor(Math.log10(zoom_Mohr*1.8)); // Le *1.8 sert à décaller le niveau (que ça bascule pas d'un niveau à l'autre trop tot dans le zoom)
 	var unite1 = zoom_Mohr/Math.pow(10,niveauZoom-1);
 	var unite2 = zoom_Mohr/Math.pow(10,niveauZoom);
 	
