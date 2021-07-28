@@ -55,6 +55,8 @@ var SESSION_XR=null;
 var stage_Mohr, scene_Mohr, dessin_mohr, cursorCercleDeMohr;
 var lastPointMohr = {x:10000000000,y:100000000};
 var zoom_Mohr=1;
+var oldMousePosition = {x:0,y:0};
+var oldScenePosition = {x:0,y:0};
 
 
 var MIN = -2;

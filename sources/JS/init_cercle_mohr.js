@@ -71,7 +71,7 @@ stage_Mohr.update();
 
 
 // EVENEMENTS ========================
-function actionMolette(event)
+function actionRouleMoletteMohr(event)
 {
 	event.preventDefault(); // Supprime le scrolling d'origine
 	var val = event.originalEvent.wheelDelta;
@@ -101,11 +101,38 @@ function actionMolette(event)
 	// REDESSINE AXES...
 	// A redessiner completement....
 	redessineAxesMohr();
-//	scene_Mohr.axes.axeX.x += (1-facteur)*(posScene.x-posSouris.x);
-//	scene_Mohr.axes.textX.x += (1-facteur)*(posScene.x-posSouris.x);
-//	scene_Mohr.axes.axeY.y += (1-facteur)*(posScene.y-posSouris.y);
-//	scene_Mohr.axes.textY.y += (1-facteur)*(posScene.y-posSouris.y);
 	
 	stage_Mohr.update();
 }
-$("#canvas_cercle_mohr").on("wheel",actionMolette)
+$("#canvas_cercle_mohr").on("wheel",actionRouleMoletteMohr)
+
+
+
+
+
+
+function actionClicMoletteMohr(event)
+{
+	
+	if(event.button==1)
+	{
+		oldMousePosition = {x:event.clientX,y:event.clientY}
+		oldScenePosition = {x:scene_Mohr.x,y:scene_Mohr.y}
+		$("#canvas_cercle_mohr").on("mousemove",mouseMoveMohr);
+	}
+}
+
+
+function mouseMoveMohr(event)
+{
+	scene_Mohr.x=oldScenePosition.x+(event.clientX-oldMousePosition.x)
+	scene_Mohr.y=oldScenePosition.y+(event.clientY-oldMousePosition.y)
+	redessineAxesMohr();
+	stage_Mohr.update();
+}
+
+$("#canvas_cercle_mohr").on("mousedown",actionClicMoletteMohr)
+
+
+$("#canvas_cercle_mohr").on("mouseup",function(){$("#canvas_cercle_mohr").off("mousemove")})
+
