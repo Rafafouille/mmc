@@ -56,6 +56,7 @@ axes.addChild(axeY);
 
 // DESSIN =======================
 dessin_mohr = new createjs.Container();
+scene_Mohr.dessin = dessin_mohr;
 scene_Mohr.addChild(dessin_mohr)
 
 

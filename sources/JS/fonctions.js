@@ -675,3 +675,12 @@ function afficheContrainteAvecUnite(val,chiffresSignificatifs = 0)
 	return String(val)+" "+unite
 }
 
+
+
+// Efface les tracé de Mohr
+function effaceMohr()
+{
+	scene_Mohr.dessin.removeAllChildren();
+	stage_Mohr.update();
+}
+

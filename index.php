@@ -316,6 +316,8 @@ var MAX_Z=2;
 							σ = <span id="affichage_contrainte_normale">0 Pa</span>
 							&nbsp;&nbsp;&nbsp;
 							τ = <span id="affichage_contrainte_tangentielle">0 Pa</span>
+							<br/>
+							<input class="bouton-reset"        type="button"        value="Effacer" onclick="effaceMohr()";>
 						</div>
 			       	</div>
 				</div>
