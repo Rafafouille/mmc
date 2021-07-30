@@ -34,6 +34,7 @@ function updateFromEpsilonHTML()
 		updateSigmaFromEpsilon(); // Met à jour la matrice sigma...
 		updateSigmaHTMLFromSigmaMatrix();// Puis son affichage html
 		updateGeometryFromEpsilon();
+		dessineActuelPointCercleDeMohr();
 }
 
 
@@ -155,6 +156,7 @@ function updateFromSigmaHTML()
 		
 		updateGeometryFromEpsilon();
 		calculeVecteurContrainte()//Mise à jour (math + graphique)
+		dessineActuelPointCercleDeMohr();
 }
 
 
@@ -398,6 +400,63 @@ function RAZ()
 	updateFromEpsilonHTML();
 }
 
+// Ecrit la valeur d'une perssion sous la forme d'une chaîne de caractère simplifiée (unité adaptées)
+// chiffresSignificatifs indique le nombre de chiffre après la virgule (au vue de l'unité choisie)
+function afficheContrainteAvecUnite(val,chiffresSignificatifs = 0)
+{
+
+	if(Math.abs(val)<1e-10)
+		return "0 Pa"
+
+
+	//chiffresSignificatifs+=1;
+	var nb = Math.floor(Math.log10(val)+1)
+	
+	var unite = "Pa"
+	if(nb > 12)
+	{
+		unite = "TPa"
+		val = Math.floor(val/(Math.pow(10,12-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb > 9)
+	{
+		unite = "GPa"
+		val = Math.floor(val/(Math.pow(10,9-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb > 6)
+	{
+		unite = "MPa"
+		val = Math.floor(val/(Math.pow(10,6-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb >3)
+	{
+		unite = "kPa"
+		val = Math.floor(val/(Math.pow(10,3-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb < -7)
+	{
+		unite = "nPa"
+		val = Math.floor(val/(Math.pow(10,-9-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb < -4)
+	{
+		unite = "µPa"
+		val = Math.floor(val/(Math.pow(10,-6-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else if(nb < -1)
+	{
+		unite = "mPa"
+		val = Math.floor(val/(Math.pow(10,-3-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+	else
+	{
+		unite = "Pa"
+		val = Math.floor(val/(Math.pow(10,0-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
+	}
+		
+	return String(val)+" "+unite
+}
+
 
 // COEFFICIENTS ========================================================
 
@@ -453,6 +512,7 @@ function update_from_nu()
 	updateEpsilonFromSigma();
 	updateEpsilonHTMLFromEpsilonMatrix();	// Puis son affichage html
 	updateGeometryFromEpsilon();
+	dessineActuelPointCercleDeMohr();
 }
 //Idem pour E
 update_from_E = update_from_nu;
@@ -465,6 +525,7 @@ function update_from_lambda()
 	updateEpsilonFromSigma();
 	updateEpsilonHTMLFromEpsilonMatrix();	// Puis son affichage html
 	updateGeometryFromEpsilon();
+	dessineActuelPointCercleDeMohr();
 }
 //Idem pour mu
 update_from_mu = update_from_lambda;
@@ -625,62 +686,7 @@ function redessineAxesMohr()
 }
 
 
-// Ecrit la valeur d'une perssion sous la forme d'une chaîne de caractère simplifiée (unité adaptées)
-// chiffresSignificatifs indique le nombre de chiffre après la virgule (au vue de l'unité choisie)
-function afficheContrainteAvecUnite(val,chiffresSignificatifs = 0)
-{
 
-	if(Math.abs(val)<1e-10)
-		return "0 Pa"
-
-
-	//chiffresSignificatifs+=1;
-	var nb = Math.floor(Math.log10(val)+1)
-	
-	var unite = "Pa"
-	if(nb > 12)
-	{
-		unite = "TPa"
-		val = Math.floor(val/(Math.pow(10,12-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
-	}
-	else if(nb > 9)
-	{
-		unite = "GPa"
-		val = Math.floor(val/(Math.pow(10,9-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
-	}
-	else if(nb > 6)
-	{
-		unite = "MPa"
-		val = Math.floor(val/(Math.pow(10,6-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
-	}
-	else if(nb >3)
-	{
-		unite = "kPa"
-		val = Math.floor(val/(Math.pow(10,3-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
-	}
-	else if(nb < -7)
-	{
-		unite = "nPa"
-		val = Math.floor(val/(Math.pow(10,-9-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
-	}
-	else if(nb < -4)
-	{
-		unite = "µPa"
-		val = Math.floor(val/(Math.pow(10,-6-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
-	}
-	else if(nb < -1)
-	{
-		unite = "mPa"
-		val = Math.floor(val/(Math.pow(10,-3-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
-	}
-	else
-	{
-		unite = "Pa"
-		val = Math.floor(val/(Math.pow(10,0-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
-	}
-		
-	return String(val)+" "+unite
-}
 
 
 
