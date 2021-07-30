@@ -103,9 +103,6 @@ var MAX_Z=2;
        					<td><input type="checkbox" id="bouton_affiche_base_propre" name="bouton_affiche_base_propre"  onchange="update_affichage_base_propre()"></td>
        					<td><label for="bouton_affiche_base_propre">Afficher la base propre</label></td>
 
-       					<td><input type="checkbox" id="bouton_affiche_T" name="bouton_affiche_T" onchange="update_affichage_T()"></td>
-       					<td><label for="bouton_affiche_T">Afficher le vecteur contrainte</label></td>
-
        					<td></td>
        					<td><input class="bouton-reset"        type="button"        value="RAZ" onclick="RAZ()";></td>
 
@@ -274,39 +271,57 @@ var MAX_Z=2;
 			    <!-- NORMALE ==================== -->
 			       <div class="boite_deroulante" id="vecteur_normal">
 			       	<div class="titre_div_deroulant" onclick="$(this).parent().find('.contenu_div_deroulant').slideToggle()">
-			       		Normale / Vecteur contrainte / Cercle de Mohr
+			       		Normale / Vecteur contrainte / Cercles de Mohr
 			       	</div>
 			       	<div class="contenu_div_deroulant">
-				       	<div style="display:inline-block;">
+			       		<div id="option_mohr" style="margin-bottom:10px;">
+			       			<form>
+		       					<input type="checkbox" id="bouton_affiche_T" name="bouton_affiche_T" onchange="update_affichage_T()">
+       							<label for="bouton_affiche_T">Afficher le vect. contrainte</label>
+		       					<input type="checkbox" id="bouton_suivi_Mohr" name="bouton_suivi_Mohr" checked="checked" onchange="$('#marque_point_mohr').button('option','disabled', traceContinueMohr() );dessineActuelPointCercleDeMohr(true)">
+       							<label for="bouton_suivi_Mohr">Tracé continu</label>
+       							<button type="button" id="marque_point_mohr" onclick="dessineActuelPointCercleDeMohr(true)">Marquer un point</button>
+       						</form>
+						        <script>
+									$("#option_mohr input:checkbox").checkboxradio();
+									$("#marque_point_mohr").button({disabled: true});
+						        </script>
+						</div>
+       					
+				       	<div style="display:inline-block;vertical-align:middle;">
 							<div style="display:inline;">n&#8407; =</div>
 							<div class="tenseur">
 								<form>
 									<table>
 										<tr>
 											<td style="border-top:solid">&nbsp;</td>
-											<td><input type="number" id="n_x" name="n_x" size="2" step="0.1" value="1" title="n_x" onchange="updateNormaleVecteurFromNormaleHTML()" /></td>
+											<td><input type="number" id="n_x" name="n_x" size="2" step="0.1" value="0.8" title="n_x" onchange="updateNormaleVecteurFromNormaleHTML()" /></td>
 											<td style="border-top:solid">&nbsp;</td>
 										</tr>
 										<tr>
 											<td>&nbsp;</td>
-											<td><input type="number" id="n_y" name="n_y" size="2" step="0.1" value="0" title="n_y" onchange="updateNormaleVecteurFromNormaleHTML()" /></td>
+											<td><input type="number" id="n_y" name="n_y" size="2" step="0.1" value="0.53" title="n_y" onchange="updateNormaleVecteurFromNormaleHTML()" /></td>
 											<td>&nbsp;</td>
 										</tr>
 										<tr>
 											<td style="border-bottom:solid">&nbsp;</td>
-											<td><input type="number" id="n_z" name="n_z" size=2 step="0.1" value="0" title="n_z" onchange="updateNormaleVecteurFromNormaleHTML()" /></td>
+											<td><input type="number" id="n_z" name="n_z" size=2 step="0.1" value="0.27" title="n_z" onchange="updateNormaleVecteurFromNormaleHTML()" /></td>
 											<td style="border-bottom:solid">&nbsp;</td>
 										</tr>
 									</table>
 								</form>
 							</div>
 						</div>
-				       	<div style="display:inline-block;">
-				       		<button onclick="nRotationX(-math.pi/12)">-Rx</button><button onclick="nRotationX(math.pi/12)">+Rx</button>
+				       	<div id="boutons_rotation_normale" style="display:inline-block;vertical-align:middle;margin-left:30px;">
+				       		<button onclick="nRotationX(-math.pi/12)">-15°</button>&nbsp;R<sub>x</sub>&nbsp;<button onclick="nRotationX(math.pi/12)">+15°</button>
 				       		<br/>
-				       		<button onclick="nRotationY(-math.pi/12)">-Ry</button><button onclick="nRotationY(math.pi/12)">+Ry</button>
+				       		<button onclick="nRotationY(-math.pi/12)">-15°</button>&nbsp;R<sub>y</sub>&nbsp;<button onclick="nRotationY(math.pi/12)">+15°</button>
 				       		<br/>
-				       		<button onclick="nRotationZ(-math.pi/12)">-Rz</button><button onclick="nRotationZ(math.pi/12)">+Rz</button>
+				       		<button onclick="nRotationZ(-math.pi/12)">-15°</button>&nbsp;R<sub>z</sub>&nbsp;<button onclick="nRotationZ(math.pi/12)">+15°</button>
+				       		
+							<script>
+								$("#boutons_rotation_normale button").button();
+							</script>
 				       	</div>
 				       	
 						<div id="cercle_mohr">
@@ -317,7 +332,10 @@ var MAX_Z=2;
 							&nbsp;&nbsp;&nbsp;
 							τ = <span id="affichage_contrainte_tangentielle">0 Pa</span>
 							<br/>
-							<input class="bouton-reset"        type="button"        value="Effacer" onclick="effaceMohr()";>
+							<button class="bouton-reset" id="efface_Mohr"       type="button"  onclick="effaceMohr()">Effacer</button>
+							<script>
+									$("#efface_Mohr").button();
+							</script>
 						</div>
 			       	</div>
 				</div>

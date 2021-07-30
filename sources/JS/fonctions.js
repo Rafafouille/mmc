@@ -507,14 +507,11 @@ function ajoutePointCercleDeMohr(x,y)
 {
 	var circle = new createjs.Shape();
 	
-	cursorCercleDeMohr.x = x * zoom_Mohr ;
-	cursorCercleDeMohr.y = -y * zoom_Mohr ;
 	
 	circle.graphics.beginFill("red").drawCircle(0, 0, 3);
 	circle.x = x * zoom_Mohr ;
 	circle.y = -y * zoom_Mohr ;
 	dessin_mohr.addChild(circle);
-	stage_Mohr.update();
 	lastPointMohr.x=x; //Sauvegarde les dernières coordonnées.
 	lastPointMohr.y=y;
 }
@@ -522,14 +519,21 @@ function ajoutePointCercleDeMohr(x,y)
 // Dessine LE point actuel (à partir de sigma et de n) sur le cercle de mohr
 // DistMin empeche de dessiner si le point est proche (au sens de distMin) du précédent.
 // Les coordonnées du nouveau point sont mis à jour dans 
-function dessineActuelPointCercleDeMohr(distMin=1)
+// Force impose de dessiner le point, même si il n'est pas a la distance min, ou en mode automatique
+function dessineActuelPointCercleDeMohr(force=false, distMin=1)
 {
 	var x=getContrainteNormale()/1000000;
 	var y=getContrainteTangeantielle()/1000000;
-	if( (x-lastPointMohr.x)*(x-lastPointMohr.x)+(y-lastPointMohr.y)*(y-lastPointMohr.y) >= distMin*distMin/scene_Mohr.scaleX/scene_Mohr.scaleX )
+	
+	// On place le curseur
+	cursorCercleDeMohr.x = x * zoom_Mohr ;
+	cursorCercleDeMohr.y = -y * zoom_Mohr ;
+	
+	if( (traceContinueMohr() && (x-lastPointMohr.x)*(x-lastPointMohr.x)+(y-lastPointMohr.y)*(y-lastPointMohr.y) >= distMin*distMin/scene_Mohr.scaleX/scene_Mohr.scaleX) || force)
 		ajoutePointCercleDeMohr(x,y);
 	$("#affichage_contrainte_normale").text(afficheContrainteAvecUnite(getContrainteNormale(),1))
 	$("#affichage_contrainte_tangentielle").text(afficheContrainteAvecUnite(getContrainteTangeantielle(),1))
+	stage_Mohr.update();
 }
 
 function redessineAxesMohr()
@@ -562,7 +566,7 @@ function redessineAxesMohr()
 		if(  Math.round(((xx+scene_Mohr.axes.axeX.x)/unite1))%10     )//Multiple de 10
 		{
 			var epaisseur = 1;
-			var couleur = "#EEEEEE";
+			var couleur = "#CCCCCC";
 		}
 		else
 		{
@@ -586,7 +590,7 @@ function redessineAxesMohr()
 		if(  Math.round(((yy+scene_Mohr.axes.axeY.y)/unite1))%10     )//Multiple de 10
 		{
 			var epaisseur = 1;
-			var couleur = "#EEEEEE";
+			var couleur = "#CCCCCC";
 		}
 		else
 		{
@@ -625,6 +629,11 @@ function redessineAxesMohr()
 // chiffresSignificatifs indique le nombre de chiffre après la virgule (au vue de l'unité choisie)
 function afficheContrainteAvecUnite(val,chiffresSignificatifs = 0)
 {
+
+	if(Math.abs(val)<1e-10)
+		return "0 Pa"
+
+
 	//chiffresSignificatifs+=1;
 	var nb = Math.floor(Math.log10(val)+1)
 	
@@ -649,8 +658,6 @@ function afficheContrainteAvecUnite(val,chiffresSignificatifs = 0)
 		unite = "kPa"
 		val = Math.floor(val/(Math.pow(10,3-chiffresSignificatifs))) / Math.pow(10,chiffresSignificatifs)
 	}
-	else if(val==0)
-		return "0 Pa"
 	else if(nb < -7)
 	{
 		unite = "nPa"
@@ -682,5 +689,12 @@ function effaceMohr()
 {
 	scene_Mohr.dessin.removeAllChildren();
 	stage_Mohr.update();
+}
+
+
+// Option de tracé en continue
+function traceContinueMohr()
+{
+	return $("#bouton_suivi_Mohr").prop('checked')
 }
 
