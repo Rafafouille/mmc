@@ -384,10 +384,8 @@ function update_affichage_T()
 }
 
 // Remet le tenseur à 0
-function RAZ()
+function function_RAZ()
 {
-//	if($("#bouton_HPP").prop('checked'))
-//	{
 		$("#eps_xx").val(0);
 		$("#eps_yy").val(0);
 		$("#eps_zz").val(0);

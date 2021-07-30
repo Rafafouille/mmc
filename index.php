@@ -86,7 +86,7 @@ var MAX_Z=2;
         
 	<!-- entete ======================= -->
 		<header>
-				<h1>Illustration des déformations en M.M.C.</h1>
+				<h1>Illustration des déformations en Mécanique des Milieux Continus</h1>
 		</header>
         
         
@@ -94,22 +94,21 @@ var MAX_Z=2;
     <!-- Options ==================== -->
        <div id="options">
        		<form>
-       					<td><input type="checkbox" id="bouton_affiche_quadrillage" name="bouton_affiche_quadrillage" onchange="update_affichage_quadrillage()"></td>
-       					<td><label for="bouton_affiche_quadrillage">Afficher le quadrillage</label></td>
+       			<input type="checkbox" id="bouton_affiche_quadrillage" name="bouton_affiche_quadrillage" onchange="update_affichage_quadrillage()">
+   				<label for="bouton_affiche_quadrillage">Afficher le quadrillage</label>
 
-       					<td><input type="checkbox" id="bouton_affiche_axes" name="bouton_affiche_axes" checked="" onchange="update_affichage_axes()"></td>
-       					<td><label for="bouton_affiche_axes">Afficher les axes</label></td>
+       			<input type="checkbox" id="bouton_affiche_axes" name="bouton_affiche_axes" checked="" onchange="update_affichage_axes()">
+       			<label for="bouton_affiche_axes">Afficher les axes</label>
  
-       					<td><input type="checkbox" id="bouton_affiche_base_propre" name="bouton_affiche_base_propre"  onchange="update_affichage_base_propre()"></td>
-       					<td><label for="bouton_affiche_base_propre">Afficher la base propre</label></td>
+       			<input type="checkbox" id="bouton_affiche_base_propre" name="bouton_affiche_base_propre"  onchange="update_affichage_base_propre()">
+       			<label for="bouton_affiche_base_propre">Afficher la base propre de <span style="border-bottom: 3px double;">ε</span></label>
 
-       					<td></td>
-       					<td><input class="bouton-reset"        type="button"        value="RAZ" onclick="RAZ()";></td>
-
+    				<button class="bouton-reset" id="RAZ" type="button" onclick="function_RAZ();">RAZ</button>
        		</form>
        </div>
        <script>
 			$("#options input:checkbox").checkboxradio();
+			$("#RAZ").button();
        </script>
        
       

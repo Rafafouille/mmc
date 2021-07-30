@@ -5,6 +5,28 @@ body
 	font-family : sans-serif;
 }
 
+header h1
+{
+	width:80%;
+	margin:auto;
+	margin-bottom:10px;
+	background-color : #00AAAA;
+	color:white;
+	text-align:center;
+	padding:10px;
+	border-radius : 10px;
+	box-shadow: 2px 2px 8px #555;
+}
+
+
+
+/* MENU DU HAUT =================================== */
+
+#options
+{
+	margin:auto;
+	text-align:center;
+}
 
 /* AFFICHAGE TENSEURS ===========================  */
 
