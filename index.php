@@ -312,11 +312,11 @@ var MAX_Z=2;
 							</div>
 						</div>
 				       	<div id="boutons_rotation_normale" style="display:inline-block;vertical-align:middle;margin-left:30px;">
-				       		<button onclick="nRotationX(-math.pi/12)">-15°</button>&nbsp;R<sub>x</sub>&nbsp;<button onclick="nRotationX(math.pi/12)">+15°</button>
+				       		<button onclick="nRotationX(-math.pi/36)">-5°</button>&nbsp;R<sub>x</sub>&nbsp;<button onclick="nRotationX(math.pi/36)">+5°</button>
 				       		<br/>
-				       		<button onclick="nRotationY(-math.pi/12)">-15°</button>&nbsp;R<sub>y</sub>&nbsp;<button onclick="nRotationY(math.pi/12)">+15°</button>
+				       		<button onclick="nRotationY(-math.pi/36)">-5°</button>&nbsp;R<sub>y</sub>&nbsp;<button onclick="nRotationY(math.pi/36)">+5°</button>
 				       		<br/>
-				       		<button onclick="nRotationZ(-math.pi/12)">-15°</button>&nbsp;R<sub>z</sub>&nbsp;<button onclick="nRotationZ(math.pi/12)">+15°</button>
+				       		<button onclick="nRotationZ(-math.pi/36)">-5°</button>&nbsp;R<sub>z</sub>&nbsp;<button onclick="nRotationZ(math.pi/36)">+5°</button>
 				       		
 							<script>
 								$("#boutons_rotation_normale button").button();
