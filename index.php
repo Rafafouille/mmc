@@ -365,7 +365,7 @@ var MAX_Z=2;
 			       		À Propos
 			       	</div>
 			       	<div class="contenu_div_deroulant">
-				       	Application web développée par <a href="allais.eu">Raphaël ALLAIS</a>,<br/>
+				       	Application web développée par <a href="https://allais.eu">Raphaël ALLAIS</a>,<br/>
 				       	dans le cadre de vacations à l'<a href="https://www.estp.fr/campus-de-dijon">ESTP Paris, campus de Dijon</a>.<br/>
 				       	&#9993; : allais.raphael<span class="aarroobbaatt">free.fr</span><br/>
 				       	<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
